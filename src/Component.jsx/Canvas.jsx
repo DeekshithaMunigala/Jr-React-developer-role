@@ -18,7 +18,6 @@ const Canvas = () => {
     const x = e.clientX - point.left;
     const y = e.clientY - point.top;
     const radius = Math.random() * 50 + 50;
-    // let color = `#${Math.random().toString(16).substring(-6)}`;
     let color = getRandomColor();
     const newCricle = { x, y, radius, color };
     setCircles([...circles, newCricle]);
@@ -30,13 +29,13 @@ const Canvas = () => {
     }
   };
 
-  const checkOverlap = (newCricle, existingCircles) => {
+  const checkOverlap = (newCircle, existingCircles) => {
     return existingCircles.some((circle) => {
       const distance = Math.sqrt(
-        Math.pow(circle.x - newCricle.x, 2) +
-          Math.pow(circle.y - newCricle.y, 2)
+        Math.pow(circle.x - newCircle.x, 2) +
+          Math.pow(circle.y - newCircle.y, 2)
       );
-      return distance < circle.radius + newCricle.radius;
+      return distance < circle.radius + newCircle.radius;
     });
   };
 
@@ -50,7 +49,7 @@ const Canvas = () => {
       context.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
       context.fillStyle = circle.color;
       context.fill();
-      context.stroke();
+      // context.stroke();
     });
   }, [circles]);
 
