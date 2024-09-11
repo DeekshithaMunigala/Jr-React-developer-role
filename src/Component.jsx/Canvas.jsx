@@ -49,15 +49,30 @@ const Canvas = () => {
       context.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
       context.fillStyle = circle.color;
       context.fill();
-      // context.stroke();
     });
   }, [circles]);
+
+  useEffect(() => {
+    const resizeCanvas = () => {
+      const canvas = canvasRef.current;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    resizeCanvas();
+
+    window.addEventListener("resize", resizeCanvas);
+
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+    };
+  }, []);
 
   return (
     <canvas
       ref={canvasRef}
       onClick={handleCanvasClick}
-      width="800"
+      width="1200"
       height="800"
       style={{ border: "1px solid black" }}
     ></canvas>
